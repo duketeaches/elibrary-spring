@@ -41,25 +41,25 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan(basePackages = "duke.learn.elibrary")
 public class SpringConfig implements WebMvcConfigurer {
 
-    @Value("${dm.url}")
+    @Value("${db.url}")
     private String dbUrl;
 
-    @Value("${dm.username}")
+    @Value("${db.username}")
     private String dbUsername;
 
-    @Value("${dm.password}")
+    @Value("${db.password}")
     private String dbPassword;
 
-    @Value("${dm.driver}")
+    @Value("${db.driver}")
     private String driver;
 
-    @Value("$ hibernate.dialectr}")
+    @Value("${hibernate.dialect}")
     private String dialect;
 
     @Value("${hibernate.hbm2ddl}")
     private String hbm2ddl;
 
-    @Value("${ hibernate.showsql}")
+    @Value("${hibernate.showsql}")
     private boolean showSql;
 
     @Value("${hibernate.formatsql}")
@@ -68,7 +68,7 @@ public class SpringConfig implements WebMvcConfigurer {
     @Value("${hibernate.connection_strategy}")
     private String connectionStategy;
 
-    @Value("${ hibernate.enable_lazy_load}")
+    @Value("${hibernate.enable_lazy_load}")
     private boolean lazyLoad;
 
     @Bean

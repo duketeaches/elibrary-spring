@@ -24,7 +24,7 @@ public class Book implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
-    private String bookId;
+    private Integer bookId;
 
     @Column
     private String name;
@@ -38,11 +38,11 @@ public class Book implements Serializable {
     @Column
     private String isbn;
 
-    public String getBookId() {
+    public Integer getBookId() {
 	return bookId;
     }
 
-    public void setBookId(String bookId) {
+    public void setBookId(Integer bookId) {
 	this.bookId = bookId;
     }
 

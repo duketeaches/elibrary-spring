@@ -21,7 +21,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User implements Serializable {
 
     private static final long serialVersionUID = -905739422113847285L;
@@ -29,7 +29,7 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private String userId;
+    private Integer userId;
 
     @ManyToOne
     @JoinColumn(name = "person_id")
@@ -48,11 +48,35 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public String getUserId() {
+    /**
+     * @param person
+     * @param username
+     * @param password
+     * @param email
+     * @param role
+     */
+    public User(Person person, String username, String password, String email, Role role) {
+	super();
+	this.person = person;
+	this.username = username;
+	this.password = password;
+	this.email = email;
+	this.role = role;
+    }
+
+    /**
+     * 
+     */
+    public User() {
+	super();
+	// TODO Auto-generated constructor stub
+    }
+
+    public Integer getUserId() {
 	return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
 	this.userId = userId;
     }
 
