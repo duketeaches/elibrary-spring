@@ -24,8 +24,10 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -89,10 +91,18 @@ public class SpringConfig implements WebMvcConfigurer {
 	return messageSource;
     }
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	registry.addResourceHandler("/css/**").addResourceLocations("/css/");
+	// .setCacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS).cachePublic());
+	registry.addResourceHandler("/images/**").addResourceLocations("/images/");
+	// .setCacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS).cachePublic());
+    }
+
     @Bean
     public ViewResolver viewResolver() {
 	InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-	resolver.setPrefix("/jsp/");
+	resolver.setPrefix("/pages/");
 	resolver.setSuffix(".jsp");
 	return resolver;
     }
@@ -133,5 +143,12 @@ public class SpringConfig implements WebMvcConfigurer {
 	JpaTransactionManager transactionManager = new JpaTransactionManager();
 	transactionManager.setEntityManagerFactory(entityManager().getObject());
 	return transactionManager;
+    }
+
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver multipartResolver() {
+	CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+	multipartResolver.setMaxUploadSize(-1);
+	return multipartResolver;
     }
 }

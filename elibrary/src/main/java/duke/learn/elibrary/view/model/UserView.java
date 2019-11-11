@@ -3,8 +3,6 @@
  */
 package duke.learn.elibrary.view.model;
 
-import duke.learn.elibrary.data.model.Role;
-
 /**
  * @author Kazi
  *
@@ -18,27 +16,14 @@ public class UserView implements CommonInput {
     private String number;
     private String username;
     private String password;
-    private Role role;
+    private boolean admin;
 
     /**
-     * @param name
-     * @param age
-     * @param email
-     * @param number
-     * @param username
-     * @param password
-     * @param role
+     * 
      */
-    public UserView(String name, Integer age, String email, String number, String username, String password,
-	    Role role) {
+    public UserView() {
 	super();
-	this.name = name;
-	this.age = age;
-	this.email = email;
-	this.number = number;
-	this.username = username;
-	this.password = password;
-	this.role = role;
+	// TODO Auto-generated constructor stub
     }
 
     /**
@@ -49,10 +34,10 @@ public class UserView implements CommonInput {
      * @param number
      * @param username
      * @param password
-     * @param role
+     * @param admin
      */
     public UserView(Integer userId, String name, Integer age, String email, String number, String username,
-	    String password, Role role) {
+	    String password, boolean admin) {
 	super();
 	this.userId = userId;
 	this.name = name;
@@ -61,10 +46,15 @@ public class UserView implements CommonInput {
 	this.number = number;
 	this.username = username;
 	this.password = password;
-	this.role = role;
+	this.admin = admin;
     }
 
-    public UserView() {
+    public Integer getUserId() {
+	return userId;
+    }
+
+    public void setUserId(Integer userId) {
+	this.userId = userId;
     }
 
     public String getName() {
@@ -115,26 +105,18 @@ public class UserView implements CommonInput {
 	this.password = password;
     }
 
+    public boolean isAdmin() {
+	return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+	this.admin = admin;
+    }
+
     @Override
     public String toString() {
 	return "UserView [userId=" + userId + ", name=" + name + ", age=" + age + ", email=" + email + ", number="
-		+ number + ", username=" + username + ", password=" + password + ", role=" + role + "]";
-    }
-
-    public Integer getUserId() {
-	return userId;
-    }
-
-    public void setUserId(Integer userId) {
-	this.userId = userId;
-    }
-
-    public Role getRole() {
-	return role;
-    }
-
-    public void setRole(Role role) {
-	this.role = role;
+		+ number + ", username=" + username + ", password=" + password + ", admin=" + admin + "]";
     }
 
 }

@@ -5,10 +5,9 @@ package duke.learn.elibrary.data.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +30,7 @@ public class User implements Serializable {
     @Column(name = "user_id")
     private Integer userId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id")
     private Person person;
 
@@ -45,24 +44,7 @@ public class User implements Serializable {
     private String email;
 
     @Column
-    @Enumerated(EnumType.STRING)
-    private Role role;
-
-    /**
-     * @param person
-     * @param username
-     * @param password
-     * @param email
-     * @param role
-     */
-    public User(Person person, String username, String password, String email, Role role) {
-	super();
-	this.person = person;
-	this.username = username;
-	this.password = password;
-	this.email = email;
-	this.role = role;
-    }
+    private boolean admin;
 
     /**
      * 
@@ -70,6 +52,24 @@ public class User implements Serializable {
     public User() {
 	super();
 	// TODO Auto-generated constructor stub
+    }
+
+    /**
+     * @param userId
+     * @param person
+     * @param username
+     * @param password
+     * @param email
+     * @param admin
+     */
+    public User(Integer userId, Person person, String username, String password, String email, boolean admin) {
+	super();
+	this.userId = userId;
+	this.person = person;
+	this.username = username;
+	this.password = password;
+	this.email = email;
+	this.admin = admin;
     }
 
     public Integer getUserId() {
@@ -112,26 +112,26 @@ public class User implements Serializable {
 	this.email = email;
     }
 
-    public Role getRole() {
-	return role;
+    public boolean isAdmin() {
+	return admin;
     }
 
-    public void setRole(Role role) {
-	this.role = role;
+    public void setAdmin(boolean admin) {
+	this.admin = admin;
     }
 
     @Override
     public String toString() {
 	return "User [userId=" + userId + ", person=" + person + ", username=" + username + ", password=" + password
-		+ ", email=" + email + ", role=" + role + "]";
+		+ ", email=" + email + ", admin=" + admin + "]";
     }
 
     @Override
     public int hashCode() {
 	final int prime = 31;
 	int result = 1;
-	result = prime * result + ((person == null) ? 0 : person.hashCode());
 	result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+	result = prime * result + ((username == null) ? 0 : username.hashCode());
 	return result;
     }
 
@@ -144,15 +144,15 @@ public class User implements Serializable {
 	if (getClass() != obj.getClass())
 	    return false;
 	User other = (User) obj;
-	if (person == null) {
-	    if (other.person != null)
-		return false;
-	} else if (!person.equals(other.person))
-	    return false;
 	if (userId == null) {
 	    if (other.userId != null)
 		return false;
 	} else if (!userId.equals(other.userId))
+	    return false;
+	if (username == null) {
+	    if (other.username != null)
+		return false;
+	} else if (!username.equals(other.username))
 	    return false;
 	return true;
     }

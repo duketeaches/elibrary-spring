@@ -33,7 +33,7 @@ public class UserRepository {
 	return user;
     }
 
-    public User getUserByUsername(Integer userId) {
+    public User getUser(Integer userId) {
 	User user = null;
 	try {
 	    user = (User) entityManager.createQuery("select u from User u where u.userId = :userId")
@@ -43,7 +43,7 @@ public class UserRepository {
 	return user;
     }
 
-    public User getUserByUsername(String username) {
+    public User getUser(String username) {
 	User user = null;
 	try {
 	    user = (User) entityManager.createQuery("select u from User u where u.username = :username")
