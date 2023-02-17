@@ -34,7 +34,7 @@ public class UserService {
     @Autowired
     private HttpServletResponse response;
 
-    @Transactional
+    @Transactional(transactionManager = "transactionManager")
     public Response registerUser(UserView view) {
 	String message = null;
 	Status status = Status.FAILURE;
